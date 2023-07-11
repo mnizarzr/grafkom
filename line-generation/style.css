@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
+
+:root {
+  --pixel-size: 10px;
+  --grap-color: #cdf3ff;
+  --grid-color: #005c9136;
+  --pixel-color: #387086;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 20pt;
+  font-weight: 500;
+  margin: auto;
+  text-align: center;
+}
+
+.container {
+  max-width: 720px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+#controller {
+  width: 600px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #387086;
+  font-size: 0.9rem;
+  background: #cdf3ff;
+  border-radius: 1rem;
+  border: solid 1px #005c9136;
+}
+
+#controller > div {
+  /* margin: 0.25rem 0 0.25rem; */
+  /* width: 100%; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#drawing-tool {
+  /* display: flex; */
+  /* justify-content: space-between; */
+}
+
+/* #coordinates > div {
+  flex-direction: column;
+  justify-content: space-between;
+} */
+
+/* #drawing-tool {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#drawing-tool > div {
+  margin-top: 0.5rem;
+} */
+
+input[type="number"] {
+  width: 6rem;
+}
+
+#graph {
+  position: relative;
+  margin: 1rem 0;
+  max-height: 98vw;
+  max-width: 98vw;
+  height: 600px;
+  width: 600px;
+  background-color: var(--grap-color);
+}
+
+.grid-lines {
+  position: absolute;
+  height: calc(100% + 1px);
+  width: calc(100% + 1px);
+  background-size: var(--pixel-size) var(--pixel-size);
+  background-image: linear-gradient(
+      to right,
+      var(--grid-color) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+}
+
+.pixel {
+  position: absolute;
+  height: calc(var(--pixel-size));
+  width: calc(var(--pixel-size));
+  background: var(--pixel-color);
+}

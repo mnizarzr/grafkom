@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        canvas {
+            border: 1px solid black;
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas"></canvas>
+
+    <script>
+        function drawPixel(context, x, y, size, fillColor, strokeColor) {
+            context.fillStyle = fillColor;
+            context.fillRect(x * size, y * size, size, size);
+            context.strokeStyle = strokeColor;
+            context.strokeRect(x * size, y * size, size, size);
+        }
+
+        function drawCircle(context, xc, yc, x, y, size, fillColor, strokeColor) {
+            drawPixel(context, xc + x, yc + y, size, fillColor, strokeColor);
+            drawPixel(context, xc - x, yc + y, size, fillColor, strokeColor);
+            drawPixel(context, xc + x, yc - y, size, fillColor, strokeColor);
+            drawPixel(context, xc - x, yc - y, size, fillColor, strokeColor);
+            drawPixel(context, xc + y, yc + x, size, fillColor, strokeColor);
+            drawPixel(context, xc - y, yc + x, size, fillColor, strokeColor);
+            drawPixel(context, xc + y, yc - x, size, fillColor, strokeColor);
+            drawPixel(context, xc - y, yc - x, size, fillColor, strokeColor);
+        }
+
+        function circleBres(context, xc, yc, r, size, fillColor, strokeColor) {
+            let x = 0;
+            let y = r;
+            let d = 3 - 2 * r;
+
+            while (y >= x) {
+                drawCircle(context, xc, yc, x, y, size, fillColor, strokeColor);
+                x++;
+
+                if (d > 0) {
+                    y--;
+                    d = d + 4 * (x - y) + 10;
+                } else {
+                    d = d + 4 * x + 6;
+                }
+
+                drawCircle(context, xc, yc, x, y, size, fillColor, strokeColor);
+            }
+        }
+
+        function main() {
+            const canvas = document.getElementById("myCanvas");
+            const context = canvas.getContext("2d");
+            const xc = 0,
+                yc = 0,
+                r = 50;
+            const pixelSize = 10;
+            const fillColor = ["red", "green", "blue", "yellow", "purple"]; // Add more colors if desired
+            const strokeColor = "black";
+
+            const { height, width } = canvas;
+            context.clearRect(0, 0, width, height);
+
+            context.beginPath();
+            context.moveTo(0, height / 2);
+            context.lineTo(width, height / 2);
+            context.moveTo(width / 2, 0);
+            context.lineTo(width / 2, height);
+            context.strokeStyle = strokeColor;
+            context.stroke();
+
+            let colorIndex = 0;
+            circleBres(context, xc, yc, r, pixelSize, fillColor[colorIndex], strokeColor);
+
+            // Change fill and stroke color for each circle
+            setInterval(() => {
+                colorIndex = (colorIndex + 1) % fillColor.length;
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.beginPath();
+                context.moveTo(0, canvas.height / 2);
+                context.lineTo(canvas.width, canvas.height / 2);
+                context.moveTo(canvas.width / 2, 0);
+                context.lineTo(canvas.width / 2, canvas.height);
+                context.strokeStyle = strokeColor;
+                context.stroke();
+                circleBres(context, xc, yc, r, pixelSize, fillColor[colorIndex], strokeColor);
+            }, 1000); // Change color every second
+        }
+
+        window.addEventListener("load", main);
+
+
+    </script>
+</body>
+
+</html>

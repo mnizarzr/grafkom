@@ -39,7 +39,7 @@
         </span>
       </div>
       <form id="drawing-tool">
-        <div id="coordinates" class="grid grid-m-1">
+        <div id="blg-controller" class="grid grid-m-1">
           <div>
             <label for="x1">x<sub>1</sub>:</label>
             <input class="input input-bordered" type="number" id="x1" min="1" />
@@ -51,6 +51,16 @@
             <input class="input input-bordered" type="number" id="x2" min="1" />
             <label for="y2">y<sub>2</sub>:</label>
             <input class="input input-bordered" type="number" id="y2" min="1" />
+          </div>
+        </div>
+        <div id="bcg-controller" class="grid grid-m-1" style="display: none;">
+          <div>
+            <label for="xc">xc:</label>
+            <input class="input input-bordered" type="number" id="xc" min="1" />
+            <label for="yc">yc:</label>
+            <input class="input input-bordered" type="number" id="yc" min="1" />
+            <label for="r">r:</label>
+            <input class="input input-bordered" type="number" id="r" min="1" />
           </div>
         </div>
         <div id="controller-button">

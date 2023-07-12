@@ -1,8 +1,11 @@
-function createPixel(x, y) {
+function createPixel(x, y, color) {
   const pixel = document.createElement("div");
   pixel.className = "pixel";
-  pixel.style.left = x + "px";
   pixel.style.top = y + 'px';
+  pixel.style.left = x + "px";
+  if (color !== undefined) {
+    pixel.style.backgroundColor = color;
+  }
   // pixel.style.bottom = y - 1 + "px";
   console.log(pixel);
   return pixel;
@@ -35,7 +38,7 @@ class Canvas {
     return this.graph.clientHeight;
   }
 
-  drawPixel(x, y) {
+  drawPixel(x, y, color) {
     const pixelSize = this.pixelSize.replace("px", "");
 
     const range = { min: 1, max: this.graphSize / pixelSize };
@@ -43,6 +46,9 @@ class Canvas {
 
     const _x = (x - 1) * pixelSize + 1;
     const _y = (y - 1) * pixelSize + 1;
+    if (color !== undefined) {
+      return this.graph.appendChild(createPixel(_x, _y, color));
+    }
     return this.graph.appendChild(createPixel(_x, _y));
   }
 
